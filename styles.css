@@ -4,7 +4,7 @@ body {
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: #F1F0E8;
     color: #333;
 }
 
@@ -16,8 +16,8 @@ body {
 }
 
 header {
-    background: #0073e6;
-    color: #fff;
+    background: #3674B5;
+    color: #F1F0E8;
     padding: 20px 0;
     text-align: center;
     position: relative;
@@ -36,26 +36,58 @@ header::before {
     z-index: 1;
 }
 
+.logo-title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    animation: fadeIn 1s ease;
+}
+
 header h1 {
     margin: 0;
     font-size: 2.5rem;
     position: relative;
-    z-index: 2;
+    animation: slideIn 1s ease;
 }
 
 header p {
     margin: 5px 0 0;
     font-size: 1.2rem;
     position: relative;
-    z-index: 2;
+    animation: slideIn 1.2s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 nav {
     position: sticky;
     top: 0;
-    background: #0073e6;
+    background: #3674B5;
     z-index: 1000;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 nav ul {
@@ -71,42 +103,72 @@ nav ul li {
 }
 
 nav ul li a {
-    color: #fff;
+    color: #F1F0E8;
     text-decoration: none;
     font-size: 1.1rem;
     transition: color 0.3s ease;
+    position: relative;
 }
 
 nav ul li a:hover {
-    color: #ffdd57;
+    color: #F1F0E8;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #F1F0E8;
+    transition: width 0.3s ease;
+}
+
+nav ul li a:hover::after {
+    width: 100%;
 }
 
 .social-media {
     margin-top: 20px;
     position: relative;
     z-index: 2;
+    animation: fadeIn 1.5s ease;
 }
 
 .social-media a {
-    color: #fff;
+    color: #F1F0E8;
     margin: 0 10px;
     font-size: 1.5rem;
-    transition: color 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .social-media a:hover {
-    color: #ffdd57;
+    color: #F1F0E8;
+    transform: translateY(-3px);
 }
 
 section {
     padding: 60px 0;
+    animation: fadeInUp 1s ease;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h2 {
     text-align: center;
     margin-bottom: 40px;
     font-size: 2rem;
-    color: #0073e6;
+    color: #3674B5;
 }
 
 .about p {
@@ -118,11 +180,14 @@ h2 {
 }
 
 .experience-item, .education-item, .project-item {
-    background: #fff;
+    background: #F1F0E8;
     padding: 20px;
     margin-bottom: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
 .skills-grid {
@@ -132,22 +197,33 @@ h2 {
 }
 
 .skill-item {
-    background: #fff;
+    background: #F1F0E8;
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease, box-shadow 0.3s ease;
+}
+
+.skill-item.visible, 
+.experience-item.visible, 
+.education-item.visible, 
+.project-item.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
 .skill-item:hover {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(0);
     box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
 .skill-item i {
     font-size: 2rem;
-    color: #0073e6;
+    color: #3674B5;
     margin-bottom: 10px;
 }
 
@@ -157,8 +233,8 @@ h2 {
 }
 
 footer {
-    background: #0073e6;
-    color: #fff;
+    background: #3674B5;
+    color: #F1F0E8;
     text-align: center;
     padding: 20px 0;
     margin-top: 40px;
@@ -169,6 +245,15 @@ footer p {
 }
 
 @media (max-width: 768px) {
+    .logo-title {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .logo {
+        margin-bottom: 15px;
+    }
+    
     nav ul {
         flex-direction: column;
     }
